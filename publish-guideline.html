@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publish Guideline — Ato Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)]">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="./index.html" class="flex items-center gap-2 font-semibold text-lg">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="var(--fg)"/>
+            <path d="M8 14L14 8L20 14L14 20L8 14Z" fill="white"/>
+          </svg>
+          <span>Ato Store</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="./index.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Docs</a>
+          <a href="./getting-started.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Getting Started</a>
+          <a href="./cli-reference.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">CLI</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="./future-roadmap.html" class="text-sm font-medium text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Sign In</a>
+        <a href="./publish-guideline.html" class="bg-[var(--fg)] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#262626] transition-colors">Publish</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Documentation</div>
+      <a href="./index.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Overview
+      </a>
+      <a href="./getting-started.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Getting Started
+      </a>
+      <a href="./core-concepts.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Core Concepts
+      </a>
+      <a href="./cli-reference.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+        CLI Reference
+      </a>
+      <a href="./publish-guideline.html" class="sidebar-link active">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+        Publish Guideline
+      </a>
+      <a href="./future-roadmap.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Future Roadmap
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Source Specs</div>
+      <a href="../../docs/specs/STORE_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Store Spec
+      </a>
+      <a href="../../docs/specs/IDENTITY_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Identity Spec
+      </a>
+      <a href="../../docs/specs/CAPSULE_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Capsule Spec
+      </a>
+      <a href="../../docs/specs/CAPSULE_CLI_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        CLI Spec
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="docs-content">
+    <main class="docs-body">
+      <article class="prose animate-fade-up">
+        <h1>Publish Guideline</h1>
+        <p class="lead">
+          本ガイドは Store v0.1 の「OAuth + DID署名バインディング」モデルに合わせて、
+          署名付き <code>.capsule</code> を公開可能な状態にする手順を示します。
+        </p>
+
+        <div class="quick-nav">
+          <a href="#overview" class="quick-nav-item">公開フロー概要</a>
+          <a href="#identity" class="quick-nav-item">Identity準備</a>
+          <a href="#package" class="quick-nav-item">Package作成</a>
+          <a href="#signing" class="quick-nav-item">署名</a>
+          <a href="#store-flow" class="quick-nav-item">Store登録</a>
+          <a href="#ci-policy" class="quick-nav-item">CI Policy</a>
+          <a href="#troubleshooting" class="quick-nav-item">Troubleshooting</a>
+        </div>
+
+        <h2 id="overview">公開フロー概要</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>Publisher Identity を確立</h3>
+            <p>GitHub OAuth と DID 鍵を紐付けて Publisher を登録します。</p>
+          </div>
+          <div class="step">
+            <h3>Artifact を作成</h3>
+            <p><code>capsule pack</code> で不変な配布アーティファクトを生成します。</p>
+          </div>
+          <div class="step">
+            <h3>署名と検証情報を付与</h3>
+            <p><code>capsule sign</code> で Ed25519 署名を適用し、ハッシュ整合を確保します。</p>
+          </div>
+          <div class="step">
+            <h3>Store API へ登録</h3>
+            <p>OAuth Token と DID署名の両方を満たす公開リクエストを送信します。</p>
+          </div>
+        </div>
+
+        <h2 id="identity">1. Identity 準備</h2>
+        <p>
+          Store は「社会的信用（OAuth）」と「暗号的証明（DID署名）」の両方を要求します。
+          まず開発者鍵を生成し、Publisher登録時に DID proof を提出します。
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block">
+            <pre><span class="code-cmd">capsule</span> keygen --out ~/.capsule/keys/publisher.pem
+
+<span class="code-comment"># リポジトリをStore Sourceとして登録</span>
+<span class="code-cmd">capsule</span> source register https://github.com/your-org/your-capsule-repo --channel stable</pre>
+          </div>
+          <button class="code-copy" aria-label="Copy code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-box warning">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="content">
+            <div class="title">認証ポリシー</div>
+            <p>
+              <code>STORE_SPEC.md</code> では Publisher の OAuth は GitHub 限定です。
+              Buyer向け OAuth（Google/Apple）と区別して運用されます。
+            </p>
+          </div>
+        </div>
+
+        <h2 id="package">2. Package 作成</h2>
+        <p>
+          配布ファイル名は <code>&lt;name&gt;-&lt;version&gt;-&lt;os&gt;-&lt;arch&gt;.capsule</code> 形式が推奨です。
+          Store が OS/arch マッチングのヒントとして利用します。
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block">
+            <pre><span class="code-cmd">capsule</span> validate .
+<span class="code-cmd">capsule</span> pack . --init --standalone
+
+<span class="code-comment"># 例: hello-capsule-1.2.0-macos-aarch64.capsule</span></pre>
+          </div>
+          <button class="code-copy" aria-label="Copy code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="signing">3. 署名</h2>
+        <p>
+          署名は Ed25519、ハッシュは BLAKE3 / SHA-256 の整合確認を前提にします。
+          Store 側の配布ゲートでは <code>signature_status=verified</code> が必須です。
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block">
+            <pre><span class="code-cmd">capsule sign</span> ./dist/hello-capsule-1.2.0-macos-aarch64.capsule \
+  --key ~/.capsule/keys/publisher.pem</pre>
+          </div>
+          <button class="code-copy" aria-label="Copy code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="store-flow">4. Store 登録フロー</h2>
+        <p>
+          現行Specでは公開フローは API 中心です。
+          <code>capsule publish</code> という単一コマンド前提ではなく、
+          OAuth Token + DID署名検証を通す段階的フローになっています。
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ステップ</th>
+              <th>入力</th>
+              <th>検証</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Publisher登録</td>
+              <td><code>handle</code>, <code>author_did</code>, <code>did_proof</code></td>
+              <td>OAuth有効性 + DID署名 + timestamp許容範囲</td>
+            </tr>
+            <tr>
+              <td>Release登録</td>
+              <td>manifest, signature, content hash</td>
+              <td>immutable version + hash一致 + signer一致</td>
+            </tr>
+            <tr>
+              <td>Distribution公開</td>
+              <td>artifact + os/arch metadata</td>
+              <td>R2保存 + Presigned URL TTL + verify status</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="ci-policy">5. CI Policy (推奨)</h2>
+        <p>
+          <code>CAPSULE_SPEC.md</code> の <code>[build.lifecycle]</code> / <code>[build.policy]</code> を使うと、
+          公開前ゲートを宣言的に扱えます。
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block">
+            <pre><span class="code-pkg">[build.lifecycle]</span>
+<span class="code-key">prepare</span> = <span class="code-str">"npm ci"</span>
+<span class="code-key">build</span> = <span class="code-str">"npm run build"</span>
+<span class="code-key">package</span> = <span class="code-str">"capsule pack"</span>
+<span class="code-key">verify</span> = <span class="code-str">"capsule verify --strict"</span>
+<span class="code-key">publish</span> = <span class="code-str">"capsule publish --ci"</span>
+
+<span class="code-pkg">[build.policy]</span>
+<span class="code-key">require_attestation</span> = <span class="code-str">true</span>
+<span class="code-key">require_did_signature</span> = <span class="code-str">true</span></pre>
+          </div>
+          <button class="code-copy" aria-label="Copy code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-box">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <div class="content">
+            <div class="title">注意</div>
+            <p>
+              <code>publish</code> は build lifecycle の契約名として記述可能ですが、
+              実際の公開処理は利用しているCIアクション/Store API実装に依存します。
+            </p>
+          </div>
+        </div>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>症状</th>
+              <th>主因</th>
+              <th>対処</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>署名検証で拒否される</td>
+              <td>content hash と署名対象が不一致</td>
+              <td>pack後に再署名し、改変なしでアップロードする</td>
+            </tr>
+            <tr>
+              <td>Publisher登録が失敗する</td>
+              <td>GitHub OAuth未連携、did_proof期限切れ</td>
+              <td>再ログインし新しいtimestampで proof を再生成</td>
+            </tr>
+            <tr>
+              <td>Installで reject される</td>
+              <td><code>signature_status</code> が verified でない</td>
+              <td>Store側 verification gate を確認する</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="nav-cards">
+          <a href="./cli-reference.html" class="nav-card prev">
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <div>
+              <div class="label">Previous</div>
+              <div class="title">CLI Reference</div>
+            </div>
+          </a>
+          <a href="./future-roadmap.html" class="nav-card next">
+            <div>
+              <div class="label">Next</div>
+              <div class="title">Future Roadmap</div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="page-footer">Source specs: STORE_SPEC v0.1, IDENTITY_SPEC v0.1, CAPSULE_SPEC v0.1.</p>
+      </article>
+    </main>
+
+    <!-- TOC Sidebar -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">On this page</div>
+      <nav>
+        <a href="#overview" class="toc-link">公開フロー概要</a>
+        <a href="#identity" class="toc-link">Identity準備</a>
+        <a href="#package" class="toc-link">Package作成</a>
+        <a href="#signing" class="toc-link">署名</a>
+        <a href="#store-flow" class="toc-link">Store登録</a>
+        <a href="#ci-policy" class="toc-link">CI Policy</a>
+        <a href="#troubleshooting" class="toc-link">Troubleshooting</a>
+      </nav>
+    </aside>
+  </div>
+
+  <script src="./docs.js"></script>
+</body>
+</html>

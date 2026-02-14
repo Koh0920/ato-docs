@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLI Reference — Ato Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)]">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="./index.html" class="flex items-center gap-2 font-semibold text-lg">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="var(--fg)"/>
+            <path d="M8 14L14 8L20 14L14 20L8 14Z" fill="white"/>
+          </svg>
+          <span>Ato Store</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="./index.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Docs</a>
+          <a href="./getting-started.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Getting Started</a>
+          <a href="./cli-reference.html" class="text-sm font-medium text-[var(--fg)]">CLI</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="./future-roadmap.html" class="text-sm font-medium text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Sign In</a>
+        <a href="./publish-guideline.html" class="bg-[var(--fg)] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#262626] transition-colors">Publish</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Documentation</div>
+      <a href="./index.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Overview
+      </a>
+      <a href="./getting-started.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Getting Started
+      </a>
+      <a href="./core-concepts.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Core Concepts
+      </a>
+      <a href="./cli-reference.html" class="sidebar-link active">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+        CLI Reference
+      </a>
+      <a href="./publish-guideline.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+        Publish Guideline
+      </a>
+      <a href="./future-roadmap.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Future Roadmap
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Source Spec</div>
+      <a href="../../docs/specs/CAPSULE_CLI_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        CLI Spec
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="docs-content">
+    <main class="docs-body">
+      <article class="prose animate-fade-up">
+        <h1>CLI Reference (<code>capsule</code>)</h1>
+        <p class="lead">
+          このページは <code>CAPSULE_CLI_SPEC v0.3</code> のコマンド定義をベースにしています。
+          実装済み機能とPhase予定機能を分けて記載します。
+        </p>
+
+        <div class="quick-nav">
+          <a href="#engine" class="quick-nav-item">Engine</a>
+          <a href="#setup" class="quick-nav-item">Setup</a>
+          <a href="#open-run" class="quick-nav-item">Open/Run</a>
+          <a href="#package-sign" class="quick-nav-item">Pack/Sign</a>
+          <a href="#process" class="quick-nav-item">Ps/Logs/Close</a>
+          <a href="#guest" class="quick-nav-item">Guest</a>
+          <a href="#validate-install" class="quick-nav-item">Validate/Install</a>
+          <a href="#ipc" class="quick-nav-item">IPC</a>
+          <a href="#source" class="quick-nav-item">Source</a>
+        </div>
+
+        <h2 id="engine">Engine Commands</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule engine features</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule engine features</div>
+            <p>利用可能なEngine機能を表示します。</p>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule engine register</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule engine register --name &lt;name&gt; --path &lt;path&gt; [--default]</div>
+            <p>エンジンバイナリを <code>~/.capsule/config.toml</code> に登録します。</p>
+          </div>
+        </div>
+
+        <h2 id="setup">Setup</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule setup</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule setup --engine nacelle [--version]</div>
+            <p>既定では nacelle バイナリの取得・登録を行います。</p>
+          </div>
+        </div>
+
+        <h2 id="open-run">Open / Run</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule open</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule open &lt;path&gt; [--watch] [--background] [--enforcement]</div>
+            <p>
+              <code>.capsule</code> または <code>capsule.toml</code> を実行します。
+              <code>[ipc.imports]</code> の eager 依存がある場合、capsule-cli が先にServiceを起動して ready を待ちます。
+            </p>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule new</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule new &lt;name&gt; --template &lt;python|node|hono|rust|go|shell&gt;</div>
+            <p>テンプレートから新規プロジェクトを生成します。</p>
+          </div>
+        </div>
+
+        <h2 id="package-sign">Pack / Keygen / Sign</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule pack</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule pack [dir] [--init] [--key] [--standalone] [--enforcement]</div>
+            <p><code>.capsuleignore</code> と manifest 設定を使って配布物を生成します。</p>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule keygen</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule keygen [--out] [--force] [--json]</div>
+            <p>署名用鍵（Ed25519）を生成します。</p>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule sign</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule sign &lt;target&gt; --key &lt;path&gt; [--out]</div>
+            <p>アーティファクトへ署名を付与します。</p>
+          </div>
+        </div>
+
+        <h2 id="process">Process Management</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule ps</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule ps [--all] [--json]</div>
+            <p>起動中Capsule一覧を表示します。</p>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule close / capsule logs</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule close [--id|--name] [--all] [--force]
+capsule logs [--id|--name] [--follow] [--tail]</div>
+            <p>停止とログ追跡を行います。</p>
+          </div>
+        </div>
+
+        <h2 id="guest">Guest</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule guest</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule guest &lt;sync_path&gt;</div>
+            <p>
+              <code>.sync</code> を Guest モードで処理します。
+              現行実装は guest.v2（JSON over stdio）で、今後 JSON-RPC 2.0 へ移行予定です。
+            </p>
+          </div>
+        </div>
+
+        <h2 id="validate-install">Validate / Install</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule validate</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule validate [path]</div>
+            <p>
+              manifest の構文検証に加え、IPC予約prefix衝突、循環依存、
+              <code>remote = true</code> の警告などを扱います（v0.3+要件）。
+            </p>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule install</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule install &lt;name|path&gt;</div>
+            <p>
+              Store API の distribution 解決を通し、
+              <code>signature_status=verified</code> とハッシュ整合性を満たす配布物のみインストールします。
+            </p>
+          </div>
+        </div>
+
+        <h2 id="ipc">IPC Commands</h2>
+        <p>
+          IPC系は Phase 別で仕様化されています。<code>status</code> は v0.3、
+          それ以外は v0.4 予定です。
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Command</th>
+              <th>Phase</th>
+              <th>状態</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>capsule ipc status [--json]</code></td>
+              <td>v0.3</td>
+              <td><span class="badge plan">実装予定/設計済み</span></td>
+            </tr>
+            <tr>
+              <td><code>capsule ipc services</code></td>
+              <td>v0.4</td>
+              <td><span class="badge plan">Planned</span></td>
+            </tr>
+            <tr>
+              <td><code>capsule ipc call &lt;svc&gt; &lt;cap&gt; --input '{...}'</code></td>
+              <td>v0.4</td>
+              <td><span class="badge plan">Planned</span></td>
+            </tr>
+            <tr>
+              <td><code>capsule ipc logs / inspect</code></td>
+              <td>v0.4</td>
+              <td><span class="badge plan">Planned</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="source">Source Registration</h2>
+        <div class="command-card">
+          <div class="command-header">
+            <span class="command-name">capsule source register</span>
+            <span class="command-badge">Implemented</span>
+          </div>
+          <div class="command-body">
+            <div class="command-usage">capsule source register &lt;repo_url&gt; [--registry] [--channel stable|beta]</div>
+            <p>
+              公開GitHubリポジトリをStoreのSourceとして登録します。
+              Better Auth session（<code>CAPSULE_SESSION_TOKEN</code>）連携が推奨です。
+            </p>
+          </div>
+        </div>
+
+        <div class="info-box warning">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="content">
+            <div class="title">補足</div>
+            <p>
+              旧 <code>ato</code> 系コマンド（<code>ato publish</code> など）は本Specラインの対象外です。
+              現行ドキュメントは <code>capsule</code> 系コマンドへ統一しています。
+            </p>
+          </div>
+        </div>
+
+        <div class="nav-cards">
+          <a href="./core-concepts.html" class="nav-card prev">
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <div>
+              <div class="label">Previous</div>
+              <div class="title">Core Concepts</div>
+            </div>
+          </a>
+          <a href="./publish-guideline.html" class="nav-card next">
+            <div>
+              <div class="label">Next</div>
+              <div class="title">Publish Guideline</div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="page-footer">Source: docs/specs/CAPSULE_CLI_SPEC.md (v0.3).</p>
+      </article>
+    </main>
+
+    <!-- TOC Sidebar -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">On this page</div>
+      <nav>
+        <a href="#engine" class="toc-link">Engine</a>
+        <a href="#setup" class="toc-link">Setup</a>
+        <a href="#open-run" class="toc-link">Open/Run</a>
+        <a href="#package-sign" class="toc-link">Pack/Sign</a>
+        <a href="#process" class="toc-link">Ps/Logs/Close</a>
+        <a href="#guest" class="toc-link">Guest</a>
+        <a href="#validate-install" class="toc-link">Validate/Install</a>
+        <a href="#ipc" class="toc-link">IPC</a>
+        <a href="#source" class="toc-link">Source</a>
+      </nav>
+    </aside>
+  </div>
+
+  <script src="./docs.js"></script>
+</body>
+</html>

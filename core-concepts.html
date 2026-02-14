@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Concepts — Ato Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)]">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="./index.html" class="flex items-center gap-2 font-semibold text-lg">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="var(--fg)"/>
+            <path d="M8 14L14 8L20 14L14 20L8 14Z" fill="white"/>
+          </svg>
+          <span>Ato Store</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="./index.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Docs</a>
+          <a href="./getting-started.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Getting Started</a>
+          <a href="./cli-reference.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">CLI</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="./future-roadmap.html" class="text-sm font-medium text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Sign In</a>
+        <a href="./publish-guideline.html" class="bg-[var(--fg)] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#262626] transition-colors">Publish</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Documentation</div>
+      <a href="./index.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Overview
+      </a>
+      <a href="./getting-started.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Getting Started
+      </a>
+      <a href="./core-concepts.html" class="sidebar-link active">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Core Concepts
+      </a>
+      <a href="./cli-reference.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+        CLI Reference
+      </a>
+      <a href="./publish-guideline.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+        Publish Guideline
+      </a>
+      <a href="./future-roadmap.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Future Roadmap
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Source Specs</div>
+      <a href="../../docs/specs/CAPSULE_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Capsule Spec
+      </a>
+      <a href="../../docs/specs/DRAFT_LIFECYCLE.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Lifecycle
+      </a>
+      <a href="../../docs/specs/DRAFT_CAPSULE_IPC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        IPC Spec
+      </a>
+      <a href="../../docs/specs/TRUST_AND_KEYS.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Trust & Keys
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="docs-content">
+    <main class="docs-body">
+      <article class="prose animate-fade-up">
+        <h1>Core Concepts</h1>
+        <p class="lead">
+          Capsule の実行モデルは <code>capsule.toml</code> の宣言を基点に、
+          CLI・Runtime・Desktop が責務分離して動作します。
+        </p>
+
+        <div class="quick-nav">
+          <a href="#capsule" class="quick-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            Capsuleとは
+          </a>
+          <a href="#manifest" class="quick-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Manifest
+          </a>
+          <a href="#lifecycle" class="quick-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Lifecycle
+          </a>
+          <a href="#runtime-routing" class="quick-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+            Runtime Routing
+          </a>
+          <a href="#ipc-roles" class="quick-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            IPC Roles
+          </a>
+          <a href="#trust-model" class="quick-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Trust Model
+          </a>
+        </div>
+
+        <h2 id="capsule">Capsuleとは</h2>
+        <p>
+          Capsule は <code>.capsule</code>（アプリ配布）または <code>.sync</code>（自己更新データ）の
+          パッケージ形式です。どちらも最終的には宣言ファイルに基づき検証・実行されます。
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>形式</th>
+              <th>主目的</th>
+              <th>参照Spec</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.capsule</code></td>
+              <td>アプリ/ツール配布、runtime選択、署名検証</td>
+              <td><code>CAPSULE_SPEC.md</code></td>
+            </tr>
+            <tr>
+              <td><code>.sync</code></td>
+              <td>payload即時表示 + TTL更新 + (将来)Vault暗号化</td>
+              <td><code>SYNC_SPEC.md</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="manifest">Manifest (<code>capsule.toml</code>)</h2>
+        <p>
+          必須フィールドは <code>schema_version</code>, <code>name</code>, <code>version</code>,
+          <code>type</code>, <code>execution</code> です。追加で
+          <code>targets</code>, <code>metadata</code>, <code>build</code>,
+          <code>isolation</code> を宣言できます。
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block">
+            <pre><span class="code-key">schema_version</span> = <span class="code-str">"1.1"</span>
+<span class="code-key">name</span> = <span class="code-str">"example-app"</span>
+<span class="code-key">version</span> = <span class="code-str">"0.1.0"</span>
+<span class="code-key">type</span> = <span class="code-str">"app"</span>
+
+<span class="code-pkg">[execution]</span>
+<span class="code-key">runtime</span> = <span class="code-str">"source"</span>
+<span class="code-key">entrypoint</span> = <span class="code-str">"./main.py"</span>
+
+<span class="code-pkg">[targets.oci]</span>
+<span class="code-key">image</span> = <span class="code-str">"python:3.11-slim"</span>
+
+<span class="code-pkg">[targets.wasm]</span>
+<span class="code-comment"># digest = "sha256:..."</span></pre>
+          </div>
+          <button class="code-copy" aria-label="Copy code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="lifecycle">Lifecycle: Tasks と Services</h2>
+        <p>
+          <code>LIFECYCLE_SPEC v1.2</code> では、完了する処理を <code>[tasks]</code>、
+          常駐処理を <code>[services]</code> として明示分離します。
+          nacelle はそれを DAG として愚直実行します（Smart Build, Dumb Runtime）。
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block">
+            <pre><span class="code-pkg">[tasks.install]</span>
+<span class="code-key">cmd</span> = <span class="code-str">"npm ci"</span>
+
+<span class="code-pkg">[services.app]</span>
+<span class="code-key">cmd</span> = <span class="code-str">"npm start"</span>
+<span class="code-key">depends_on</span> = [<span class="code-str">"install"</span>]
+<span class="code-key">readiness_probe</span> = { http_get = <span class="code-str">"/health"</span>, port = <span class="code-str">"APP_PORT"</span> }
+
+<span class="code-pkg">[lifecycle]</span>
+<span class="code-key">run</span> = <span class="code-str">"app"</span></pre>
+          </div>
+          <button class="code-copy" aria-label="Copy code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="runtime-routing">Runtime Routing</h2>
+        <p>
+          ルーターの既定順は <code>oci → wasm → source</code> です。
+          ただし <code>execution.runtime</code> や明示ターゲット指定があれば優先されます。
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>判定条件</th>
+              <th>選択ランタイム</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>targets.oci.image</code> あり、または <code>execution.runtime=oci</code></td>
+              <td>OCI</td>
+            </tr>
+            <tr>
+              <td><code>targets.wasm</code> あり、または entrypoint が wasm</td>
+              <td>Wasm</td>
+            </tr>
+            <tr>
+              <td>上記以外</td>
+              <td>Source (nacelle)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="ipc-roles">IPC Roles (v1.1)</h2>
+        <p>
+          IPC v1.1 の変更点は、Broker責務の <strong>nacelle → capsule-cli</strong> 移管です。
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="icon bg-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <h4>capsule-cli</h4>
+            <p>Service解決、RefCount、Token管理、Schema検証、DAG統合</p>
+          </div>
+          <div class="concept-card">
+            <div class="icon bg-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.5"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+            </div>
+            <h4>nacelle</h4>
+            <p>Sandbox Enforcer。IPC内容は解釈せず隔離のみ担当</p>
+          </div>
+          <div class="concept-card">
+            <div class="icon bg-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5"><path d="M12 2a3 3 0 0 0-3 3v4a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+            </div>
+            <h4>ato-desktop</h4>
+            <p>HostBridge、mode切替、User Consentダイアログ</p>
+          </div>
+        </div>
+
+        <div class="info-box success">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <div class="content">
+            <div class="title">Transport非依存</div>
+            <p>
+              JSON-RPC 2.0 フォーマットは stdio / Unix Socket / Named Pipe / tsnet で共通利用されます。
+            </p>
+          </div>
+        </div>
+
+        <h2 id="trust-model">Trust Model</h2>
+        <p>
+          Trust の最小UXは TOFU + Fingerprint固定 + 失効リスト適用です。
+          署名不一致時は一時許可ではなく再検証を要求する方針が明記されています。
+        </p>
+
+        <ul>
+          <li>初回接続時に fingerprint を保存（<code>~/.capsule/trust_store.json</code>）</li>
+          <li>Petname は任意だが trust store の key_id と紐付ける</li>
+          <li>鍵ローテーションは <code>previous_key</code> 併記期間を短く維持する</li>
+        </ul>
+
+        <div class="nav-cards">
+          <a href="./getting-started.html" class="nav-card prev">
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <div>
+              <div class="label">Previous</div>
+              <div class="title">Getting Started</div>
+            </div>
+          </a>
+          <a href="./cli-reference.html" class="nav-card next">
+            <div>
+              <div class="label">Next</div>
+              <div class="title">CLI Reference</div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="page-footer">Source specs: CAPSULE_SPEC, LIFECYCLE_SPEC, CAPSULE_IPC_SPEC, TRUST_AND_KEYS.</p>
+      </article>
+    </main>
+
+    <!-- TOC Sidebar -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">On this page</div>
+      <nav>
+        <a href="#capsule" class="toc-link">Capsuleとは</a>
+        <a href="#manifest" class="toc-link">Manifest</a>
+        <a href="#lifecycle" class="toc-link">Lifecycle</a>
+        <a href="#runtime-routing" class="toc-link">Runtime Routing</a>
+        <a href="#ipc-roles" class="toc-link">IPC Roles</a>
+        <a href="#trust-model" class="toc-link">Trust Model</a>
+      </nav>
+    </aside>
+  </div>
+
+  <script src="./docs.js"></script>
+</body>
+</html>

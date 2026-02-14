@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Roadmap — Ato Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)]">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="./index.html" class="flex items-center gap-2 font-semibold text-lg">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="var(--fg)"/>
+            <path d="M8 14L14 8L20 14L14 20L8 14Z" fill="white"/>
+          </svg>
+          <span>Ato Store</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="./index.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Docs</a>
+          <a href="./getting-started.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">Getting Started</a>
+          <a href="./cli-reference.html" class="text-sm text-[var(--fg-secondary)] hover:text-[var(--fg)] transition-colors">CLI</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="./future-roadmap.html" class="text-sm font-medium text-[var(--fg)]">Sign In</a>
+        <a href="./publish-guideline.html" class="bg-[var(--fg)] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#262626] transition-colors">Publish</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Documentation</div>
+      <a href="./index.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Overview
+      </a>
+      <a href="./getting-started.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Getting Started
+      </a>
+      <a href="./core-concepts.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Core Concepts
+      </a>
+      <a href="./cli-reference.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+        CLI Reference
+      </a>
+      <a href="./publish-guideline.html" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+        Publish Guideline
+      </a>
+      <a href="./future-roadmap.html" class="sidebar-link active">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Future Roadmap
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Tracking Specs</div>
+      <a href="../../docs/specs/CAPSULE_CLI_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        CLI Spec
+      </a>
+      <a href="../../docs/specs/NACELLE_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Nacelle Spec
+      </a>
+      <a href="../../docs/specs/DESKTOP_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Desktop Spec
+      </a>
+      <a href="../../docs/specs/STORE_SPEC.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Store Spec
+      </a>
+      <a href="../../docs/specs/SPEC_V0_2.md" class="sidebar-link">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Spec Track v0.2
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="docs-content">
+    <main class="docs-body">
+      <article class="prose animate-fade-up">
+        <h1>Future Roadmap</h1>
+        <p class="lead">
+          ここではマーケティング計画ではなく、<code>docs/specs</code> に明示された
+          実装フェーズと未完了項目を基準にロードマップを示します。
+        </p>
+
+        <div class="quick-nav">
+          <a href="#status-snapshot" class="quick-nav-item">Snapshot</a>
+          <a href="#phase-v03" class="quick-nav-item">v0.3 Track</a>
+          <a href="#phase-v04" class="quick-nav-item">v0.4 Track</a>
+          <a href="#store-roadmap" class="quick-nav-item">Store</a>
+          <a href="#trust-roadmap" class="quick-nav-item">Trust/Security</a>
+          <a href="#long-term" class="quick-nav-item">Long-term</a>
+        </div>
+
+        <h2 id="status-snapshot">Status Snapshot (2026-02-07 基準)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>領域</th>
+              <th>現状</th>
+              <th>次アクション</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IPC Protocol</td>
+              <td><span class="badge ok">v1.1 Accepted</span></td>
+              <td>JSON-RPC 2.0 への実装収束</td>
+            </tr>
+            <tr>
+              <td>Lifecycle</td>
+              <td><span class="badge ok">v1.2 Accepted</span></td>
+              <td>ショートカット/明示定義の運用統一</td>
+            </tr>
+            <tr>
+              <td>CLI</td>
+              <td><span class="badge ok">v0.3</span></td>
+              <td><code>capsule ipc *</code> 系の段階導入</td>
+            </tr>
+            <tr>
+              <td>Desktop</td>
+              <td><span class="badge plan">v0.3 一部未実装</span></td>
+              <td>User Consent UI / Widget PiP</td>
+            </tr>
+            <tr>
+              <td>Store</td>
+              <td><span class="badge plan">v0.1 Accepted</span></td>
+              <td>Go coordinator からの段階移行</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="phase-v03">Near-term: v0.3 Completion</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>CLI IPC Broker 責務の完成</h3>
+            <p>Registry/RefCount/Token/Schema を capsule-cli 側へ統合し、ランタイム横断のIPCを成立させる。</p>
+          </div>
+          <div class="step">
+            <h3>nacelle の IPC Sandbox 許可</h3>
+            <p>Seatbelt/Landlock へ IPC socket path の動的許可を実装し、Token漏洩耐性を担保する。</p>
+          </div>
+          <div class="step">
+            <h3>Desktop User Consent UI</h3>
+            <p><code>capsule/ui.modeChange(target_mode="app")</code> の確認ダイアログをUIとして実装する。</p>
+          </div>
+        </div>
+
+        <h2 id="phase-v04">Mid-term: v0.4 Expansion</h2>
+        <p>次の段階では「可視化・運用性」が中心です。</p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="icon bg-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <h4>CLI: IPC診断拡張</h4>
+            <p><code>capsule ipc services/call/logs/inspect</code> を追加</p>
+          </div>
+          <div class="concept-card">
+            <div class="icon bg-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.5"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+            </div>
+            <h4>Desktop: IPC Dashboard</h4>
+            <p>起動中Shared Serviceと接続状態を可視化</p>
+          </div>
+          <div class="concept-card">
+            <div class="icon bg-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h4>Protocol: JSON-RPC 統一</h4>
+            <p>postMessage 独自形式を段階廃止し統一メソッドへ移行</p>
+          </div>
+        </div>
+
+        <h2 id="store-roadmap">Store Roadmap</h2>
+        <p>
+          Store v0.1 は設計受理済みで、Edge-first実装（Workers + D1 + R2）へ段階移行します。
+          初期は D1 LIKE 検索、将来は抽象化レイヤー経由で検索基盤を差し替える方針です。
+        </p>
+
+        <ul>
+          <li>Phase 1: API互換移行（既存CLI/Desktopを壊さない）</li>
+          <li>Phase 2: Search abstraction の強化（Meilisearch / Vectorize 検討）</li>
+          <li>Phase 3: 決済・ライセンス検証の運用成熟</li>
+        </ul>
+
+        <h2 id="trust-roadmap">Trust / Security Roadmap</h2>
+        <p>
+          Spec Track v0.2 は「拒否すべきものを確実に拒否する」方向に寄せています。
+          署名検証失敗・失効済み鍵・egress制御違反はハードエラーに収束させます。
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>要件</th>
+              <th>状態</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TOFU + Fingerprint固定</td>
+              <td>MUST</td>
+              <td>設計あり / 運用強化中</td>
+            </tr>
+            <tr>
+              <td>失効リスト適用</td>
+              <td>MUST（取得可能時）</td>
+              <td>運用詳細を継続検討</td>
+            </tr>
+            <tr>
+              <td>Strict Sandbox</td>
+              <td>MUST</td>
+              <td>ランタイム側で段階対応</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="long-term">Long-term Themes</h2>
+        <ul>
+          <li>Runtime/Platform 非依存な IPC と Capability 互換（MCP連携を含む）</li>
+          <li>Attestation-first な公開ゲートと再現可能ビルドの実運用</li>
+          <li>Spec-driven development を前提に、実装差分を縮小する運用サイクル</li>
+        </ul>
+
+        <div class="info-box">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <div class="content">
+            <div class="title">ロードマップ更新ポリシー</div>
+            <p>
+              本ページの更新起点はリリースノートではなく <code>docs/specs/*.md</code> の変更です。
+              仕様更新日を必ず明記し、未実装項目はそのまま残します。
+            </p>
+          </div>
+        </div>
+
+        <div class="nav-cards">
+          <a href="./publish-guideline.html" class="nav-card prev">
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            <div>
+              <div class="label">Previous</div>
+              <div class="title">Publish Guideline</div>
+            </div>
+          </a>
+          <a href="./index.html" class="nav-card next">
+            <div>
+              <div class="label">Back to</div>
+              <div class="title">Documentation Index</div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="page-footer">Tracking sources: specs updated through 2026-02-07.</p>
+      </article>
+    </main>
+
+    <!-- TOC Sidebar -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">On this page</div>
+      <nav>
+        <a href="#status-snapshot" class="toc-link">Snapshot</a>
+        <a href="#phase-v03" class="toc-link">v0.3 Track</a>
+        <a href="#phase-v04" class="toc-link">v0.4 Track</a>
+        <a href="#store-roadmap" class="toc-link">Store</a>
+        <a href="#trust-roadmap" class="toc-link">Trust/Security</a>
+        <a href="#long-term" class="toc-link">Long-term</a>
+      </nav>
+    </aside>
+  </div>
+
+  <script src="./docs.js"></script>
+</body>
+</html>
