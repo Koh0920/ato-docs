@@ -1,0 +1,21 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+
+const { toc } = Astro.props;
+---
+
+{toc && toc.items && toc.items.length > 0 && (
+  <aside class="toc-sidebar">
+    <div class="toc-title">On this page</div>
+    <nav>
+      {toc.items.map((item: any) => (
+        <a
+          href={`#${item.slug}`}
+          class="toc-link"
+        >
+          {item.text}
+        </a>
+      ))}
+    </nav>
+  </aside>
+)}

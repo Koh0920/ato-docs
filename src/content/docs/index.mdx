@@ -1,40 +1,54 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
-hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
-  actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
+title: Capsule Documentation
+description: Documentation for Ato.Sys Capsule platform
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+# Capsule Documentation
 
-## Next steps
+<p class="lead">
+  This documentation serves as the primary source for <code>/docs/specs</code> specifications,
+  providing current implementation status and future migration plans under the same assumptions.
+</p>
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+## How to Read This Documentation
+
+Start with [Getting Started](/getting-started) for the minimal setup, then review [Core Concepts](/core-concepts) to understand the execution model. Command specifications are in [CLI Reference](/cli-reference), and distribution procedures are in [Publish Guideline](/publish-guideline).
+
+:::tip[Policy]
+Latest spec update: February 7, 2026 (`docs/specs/README.md`).
+Refer to each spec's "Implementation Status" table for implemented/unimplemented items.
+:::
+
+## Major Spec Status
+
+| Spec | Status | Key Points |
+|------|--------|------------|
+| `CAPSULE_CLI_SPEC.md` | v0.3 | `capsule` acts as IPC Broker (migrated from nacelle) |
+| `NACELLE_SPEC.md` | v0.3 | Focus on Source Runtime + Sandbox Enforcer |
+| `DESKTOP_SPEC.md` | v0.3 | Guest Host / User Consent / Deep Link UI |
+| `DRAFT_LIFECYCLE.md` | v1.2 Accepted | `[tasks]` and `[services]` separation + DAG execution |
+| `DRAFT_CAPSULE_IPC.md` | v1.1 Accepted | JSON-RPC 2.0 as unified format |
+| `CAPSULE_SPEC.md` | v0.1 Draft | `capsule.toml` required structure |
+| `STORE_SPEC.md` | v0.1 Accepted | Cloudflare Workers + D1 + R2 distribution |
+
+## Architecture Boundaries (Smart Build, Dumb Runtime)
+
+The current basic boundaries are three layers: `capsule-cli` handles runtime selection and IPC mediation, `nacelle` handles isolation and process execution, and `ato-desktop` handles user interaction.
+
+**capsule-cli**: Router / IPC Broker / packaging / signing / validate / install
+
+**nacelle**: Source runtime, supervisor, sandbox policy enforcement
+
+**ato-desktop**: HostBridge, mode transition consent, dashboard UI
+
+## Page Index
+
+- [Getting Started](/getting-started) - Quick start: `capsule setup → new → validate → open`
+- [Core Concepts](/core-concepts) - manifest / lifecycle / runtime routing / IPC roles
+- [CLI Reference](/cli-reference) - `capsule` subcommands and phase-specific features
+- [Publish Guideline](/publish-guideline) - Creating signed artifacts and Store publication flow
+- [Future Roadmap](/future-roadmap) - v0.3→v0.4+ implementation priorities
+
+---
+
+*Updated for specs as of 2026-02-07.*

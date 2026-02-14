@@ -1,0 +1,77 @@
+---
+const { locale } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-header-left">
+      <a href="/" class="site-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="var(--fg)"/>
+          <path d="M8 14L14 8L20 14L14 20L8 14Z" fill="white"/>
+        </svg>
+        <span>Ato.Sys</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Docs</a>
+        <a href="/getting-started">Getting Started</a>
+        <a href="/cli-reference">CLI</a>
+      </nav>
+    </div>
+    <div class="site-header-right">
+      <a href="/future-roadmap" class="btn-signin">Sign In</a>
+      <a href="/publish-guideline" class="btn-publish">Publish</a>
+    </div>
+  </div>
+</header>
+
+<aside class="site-sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Documentation</div>
+    <a href="/" class="sidebar-link">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Overview
+    </a>
+    <a href="/getting-started" class="sidebar-link">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+      </svg>
+      Getting Started
+    </a>
+    <a href="/core-concepts" class="sidebar-link">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      </svg>
+      Core Concepts
+    </a>
+    <a href="/cli-reference" class="sidebar-link">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="4 17 10 11 4 5"/>
+        <line x1="12" y1="19" x2="20" y2="19"/>
+      </svg>
+      CLI Reference
+    </a>
+    <a href="/publish-guideline" class="sidebar-link">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      Publish Guideline
+    </a>
+    <a href="/future-roadmap" class="sidebar-link">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+        <line x1="8" y1="2" x2="8" y2="18"/>
+        <line x1="16" y1="6" x2="16" y2="22"/>
+      </svg>
+      Future Roadmap
+    </a>
+  </div>
+</aside>

@@ -1,49 +1,72 @@
-# Starlight Starter Kit: Basics
+# Ato.Sys Documentation
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Astro + Starlight documentation site for Capsule platform.
 
-```
-npm create astro@latest -- --template starlight
-```
+## Overview
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This documentation site is built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build/), featuring:
 
-## 🚀 Project Structure
+- English language content (default)
+- Custom Ato.Sys design system
+- Pagefind search integration
+- MDX support for interactive components
+- Responsive layout with custom sidebar
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Project Structure
 
 ```
 .
-├── public/
 ├── src/
-│   ├── assets/
+│   ├── components/          # Custom Astro components
+│   │   ├── Header.astro     # Top navigation
+│   │   ├── Sidebar.astro    # Left sidebar
+│   │   ├── TocSidebar.astro # Right TOC
+│   │   └── DocsLayout.astro # Main layout wrapper
 │   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+│   │   └── docs/           # Documentation pages (MDX)
+│   │       ├── index.mdx           # Overview
+│   │       ├── getting-started.mdx
+│   │       ├── core-concepts.mdx
+│   │       ├── cli-reference.mdx
+│   │       ├── publish-guideline.mdx
+│   │       └── future-roadmap.mdx
+│   └── styles/
+│       └── custom.css      # Custom design system styles
+├── astro.config.mjs        # Astro configuration
+└── TODO.md                 # Machine translation roadmap
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Commands
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+| Command | Action |
+| :------ | :----- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build production site to `./dist/` |
+| `npm run preview` | Preview build locally |
 
-Static assets, like favicons, can be placed in the `public/` directory.
+## Design System
 
-## 🧞 Commands
+The site uses a custom design system based on the original HTML template:
 
-All commands are run from the root of the project, from a terminal:
+- **Colors**: CSS variables in `src/styles/custom.css`
+- **Typography**: DM Sans for body, JetBrains Mono for code
+- **Components**: Custom cards, info boxes, code blocks
+- **Layout**: 280px sidebar, max 800px content width
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Content
 
-## 👀 Want to learn more?
+Documentation pages are written in MDX format in `src/content/docs/`:
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+- Use markdown for basic formatting
+- Use HTML for custom layouts when needed
+- Use `:::tip`, `:::caution`, `:::note` for callouts
+- Code blocks use standard markdown fences with language
+
+## Future: Machine Translation
+
+See `TODO.md` for planned machine translation framework implementation to support multiple languages.
+
+## License
+
+Part of the Capsule project.

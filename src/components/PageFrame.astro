@@ -1,0 +1,71 @@
+ ---
+ import type { Props } from '@astrojs/starlight/props';
+ import Header from './Header.astro';
+
+ const { locale } = Astro.props;
+ ---
+
+ <div class="page">
+   <Header locale={locale} />
+
+   <div class="main-frame">
+     <slot />
+   </div>
+ </div>
+
+ <style>
+   /* Hide first content panel containing auto-generated title */
+   .main-pane > .content-panel:first-child {
+     display: none !important;
+   }
+
+   .main-pane > .content-panel:nth-child(1) {
+     display: none !important;
+   }
+
+   h1.astro-j6tvhyss {
+     display: none !important;
+   }
+
+   .page {
+     display: block;
+     min-height: 100vh;
+   }
+
+   .main-frame {
+     margin-left: 280px;
+     padding-top: 64px;
+     min-height: 100vh;
+     background: var(--bg);
+   }
+
+   @media (max-width: 1024px) {
+     .main-frame {
+       margin-left: 0;
+     }
+   }
+ </style>
+
+ <script>
+  // Hide the first content panel (contains Starlight's auto-generated page title)
+  (() => {
+    // Try multiple methods to find and hide the first content panel
+    const hideFirstPanel = () => {
+      const mainPane = document.querySelector('.main-pane');
+      if (mainPane) {
+        const firstContentPanel = mainPane.querySelector('.content-panel:first-child');
+        if (firstContentPanel && firstContentPanel.querySelector('h1[id="_top"]')) {
+          firstContentPanel.style.setProperty('display', 'none', 'important');
+        }
+      }
+    };
+
+    // Run immediately
+    hideFirstPanel();
+
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', hideFirstPanel, { once: true });
+    }
+  })();
+</script>

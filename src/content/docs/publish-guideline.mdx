@@ -1,0 +1,90 @@
+---
+title: Publish Guideline
+description: Guidelines for publishing signed capsules
+---
+
+# Publish Guideline
+
+<p class="lead">
+  This guide aligns with Store v0.1's "OAuth + DID signature binding" model,
+  showing procedures to make signed <code>.capsule</code> publicly available.
+</p>
+
+## Publication Flow Overview
+
+Store requires both "social trust (OAuth)" and "cryptographic proof (DID signature)". First generate developer key, then submit DID proof during Publisher registration.
+
+```bash
+# Generate signing key
+capsule keygen --out ~/.capsule/keys/publisher.pem
+
+# Register repository as Store Source
+capsule source register https://github.com/your-org/your-capsule-repo --channel stable
+```
+
+:::caution[Authentication Policy]
+`STORE_SPEC.md` limits Publisher OAuth to GitHub. Distinguished from Buyer-facing OAuth (Google/Apple).
+:::
+
+## Package Creation
+
+Distribution filename format `<name>-<version>-<os>-<arch>.capsule` is recommended. Store uses this as hint for OS/arch matching.
+
+```bash
+capsule validate .
+capsule pack . --init --standalone
+
+# Example: hello-capsule-1.2.0-macos-aarch64.capsule
+```
+
+## Signing
+
+Signing uses Ed25519, with BLAKE3 / SHA-256 integrity verification prerequisite. Store distribution gate requires `signature_status=verified`.
+
+```bash
+capsule sign ./dist/hello-capsule-1.2.0-macos-aarch64.capsule \
+  --key ~/.capsule/keys/publisher.pem
+```
+
+## Store Registration Flow
+
+Current Spec uses API-centric publication flow. Not based on single `capsule publish` command, but gradual flow through OAuth Token + DID signature verification.
+
+| Step | Input | Verification |
+|------|-------|--------------|
+| Publisher registration | `handle`, `author_did`, `did_proof` | OAuth validity + DID signature + timestamp tolerance |
+| Release registration | manifest, signature, content hash | immutable version + hash match + signer match |
+| Distribution publication | artifact + os/arch metadata | R2 storage + Presigned URL TTL + verify status |
+
+## CI Policy (Recommended)
+
+Using `CAPSULE_SPEC.md`'s `[build.lifecycle]` / `[build.policy]` enables declarative pre-publication gates.
+
+```toml
+[build.lifecycle]
+prepare = "npm ci"
+build = "npm run build"
+package = "capsule pack"
+verify = "capsule verify --strict"
+publish = "capsule publish --ci"
+
+[build.policy]
+require_attestation = true
+require_did_signature = true
+```
+
+:::note
+`publish` can be written as build lifecycle contract name, but actual publication depends on your CI action/Store API implementation.
+:::
+
+## Troubleshooting
+
+| Symptom | Cause | Solution |
+|---------|-------|----------|
+| Signature verification rejected | content hash and signature target mismatch | Re-sign after pack, upload without modification |
+| Publisher registration fails | GitHub OAuth not linked, did_proof expired | Re-login and regenerate proof with new timestamp |
+| Install rejected | `signature_status` not verified | Check Store-side verification gate |
+
+---
+
+*Source specs: STORE_SPEC v0.1, IDENTITY_SPEC v0.1, CAPSULE_SPEC v0.1.*

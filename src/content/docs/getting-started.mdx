@@ -1,0 +1,91 @@
+---
+title: Getting Started
+description: Get started with Capsule CLI
+---
+
+# Getting Started
+
+<p class="lead">
+  This guide assumes <code>capsule-cli v0.3</code> and <code>LIFECYCLE_SPEC v1.2</code>,
+  showing the shortest path to create and run a new Capsule.
+</p>
+
+## Prerequisites
+
+- `capsule` command available
+- Local working directory with write access
+- For signing: write access to `~/.capsule/keys`
+
+```bash
+capsule --help
+capsule engine features
+```
+
+## Engine Setup
+
+The standard procedure for Source runtime is `capsule setup --engine nacelle`. For existing binaries, use `capsule engine register`.
+
+```bash
+capsule setup --engine nacelle
+capsule engine register --name nacelle --path /usr/local/bin/nacelle --default
+```
+
+## Create a New Capsule
+
+Use `capsule new` for template generation. Available templates: `python|node|hono|rust|go|shell`.
+
+```bash
+capsule new hello-capsule --template node
+cd hello-capsule
+```
+
+Minimal `capsule.toml` (Lifecycle shortcut) example:
+
+```toml
+schema_version = "1.1"
+name = "hello-capsule"
+version = "0.1.0"
+type = "app"
+
+[lifecycle]
+run = "node index.js"
+port = 3000
+health_check = "/health"
+```
+
+:::caution[About schema_version]
+`CAPSULE_SPEC.md` uses `1.0`, while `DRAFT_LIFECYCLE.md` uses `1.1`. Prioritize values that pass `capsule validate`.
+:::
+
+## Validate and Run
+
+1. **Validate manifest** - `capsule validate .` checks syntax/semantics/IPC conflicts.
+2. **Run capsule** - `capsule open .` executes the `capsule.toml`.
+3. **Monitor process** - `capsule ps` / `capsule logs` / `capsule close` for management.
+
+```bash
+capsule validate .
+capsule open . --watch
+capsule ps --all
+capsule logs --name hello-capsule --follow
+```
+
+## Pack and Sign
+
+For distribution, create a `.capsule` and sign with Ed25519 key. Signed artifacts can be reused in public flows or CI.
+
+```bash
+capsule pack . --init
+capsule keygen --out ~/.capsule/keys/default.pem
+capsule sign ./dist/hello-capsule.capsule --key ~/.capsule/keys/default.pem
+```
+
+## Next Steps
+
+- For manifest and lifecycle details, see [Core Concepts](/core-concepts)
+- For command options, see [CLI Reference](/cli-reference)
+- For Store publication, see [Publish Guideline](/publish-guideline)
+
+---
+
+*Source specs: CAPSULE_CLI_SPEC v0.3, DRAFT_LIFECYCLE v1.2.*

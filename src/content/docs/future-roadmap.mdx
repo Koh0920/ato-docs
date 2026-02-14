@@ -1,0 +1,69 @@
+---
+title: Future Roadmap
+description: Future development roadmap for Capsule
+---
+
+# Future Roadmap
+
+<p class="lead">
+  This shows the roadmap based on implementation phases and incomplete items
+  explicitly stated in <code>docs/specs</code>, not marketing plans.
+</p>
+
+## Status Snapshot (As of 2026-02-07)
+
+| Area | Status | Next Action |
+|------|--------|-------------|
+| IPC Protocol | v1.1 Accepted | Converge implementation to JSON-RPC 2.0 |
+| Lifecycle | v1.2 Accepted | Unify shortcut/explicit definition operations |
+| CLI | v0.3 | Gradual introduction of `capsule ipc *` commands |
+| Desktop | v0.3 Partial | User Consent UI / Widget PiP |
+| Store | v0.1 Accepted | Gradual migration from Go coordinator |
+
+## Near-term: v0.3 Completion
+
+1. **CLI IPC Broker Responsibility Completion** - Integrate Registry/RefCount/Token/Schema to capsule-cli side, enabling cross-runtime IPC.
+
+2. **Nacelle IPC Sandbox Permission** - Implement dynamic IPC socket path permission in Seatbelt/Landlock, ensuring Token leak resistance.
+
+3. **Desktop User Consent UI** - Implement `capsule/ui.modeChange(target_mode="app")` confirmation dialog as UI.
+
+## Mid-term: v0.4 Expansion
+
+The next phase focuses on "visibility and operability".
+
+- **CLI: IPC Diagnostics Extension** - Add `capsule ipc services/call/logs/inspect`
+- **Desktop: IPC Dashboard** - Visualize running Shared Services and connection status
+- **Protocol: JSON-RPC Unification** - Phase out postMessage proprietary format, migrate to unified methods
+
+## Store Roadmap
+
+Store v0.1 is design-accepted, gradually migrating to Edge-first implementation (Workers + D1 + R2). Initial D1 LIKE search, future search infrastructure replacement through abstraction layer.
+
+- Phase 1: API compatibility migration (don't break existing CLI/Desktop)
+- Phase 2: Search abstraction enhancement (considering Meilisearch / Vectorize)
+- Phase 3: Payment / license verification operational maturity
+
+## Trust / Security Roadmap
+
+Spec Track v0.2 focuses on "reliably rejecting what should be rejected". Signature verification failures, revoked keys, and egress control violations converge to hard errors.
+
+| Item | Requirement | Status |
+|------|-------------|--------|
+| TOFU + Fingerprint pinning | MUST | Design exists / operational strengthening |
+| Revocation list application | MUST (when available) | Operational details under continuous review |
+| Strict Sandbox | MUST | Gradual runtime-side response |
+
+## Long-term Themes
+
+- Runtime/Platform agnostic IPC and Capability compatibility (including MCP integration)
+- Attestation-first publication gate and reproducible build operations
+- Spec-driven development as premise, operational cycle to reduce implementation gaps
+
+:::note[Roadmap Update Policy]
+This page's update trigger is `docs/specs/*.md` changes, not release notes. Always specify spec update date, leave unimplemented items as-is.
+:::
+
+---
+
+*Tracking sources: specs updated through 2026-02-07.*

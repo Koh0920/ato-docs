@@ -1,0 +1,173 @@
+---
+title: CLI Reference
+description: Command reference for capsule CLI
+---
+
+# CLI Reference (`capsule`)
+
+<p class="lead">
+  This page is based on <code>CAPSULE_CLI_SPEC v0.3</code> command definitions,
+  separating implemented features from phase-planned features.
+</p>
+
+## Engine Commands
+
+### `capsule engine features`
+**Status:** Implemented
+
+Display available Engine features.
+
+```bash
+capsule engine features
+```
+
+### `capsule engine register`
+**Status:** Implemented
+
+Register engine binary to `~/.capsule/config.toml`.
+
+```bash
+capsule engine register --name <name> --path <path> [--default]
+```
+
+## Setup
+
+### `capsule setup`
+**Status:** Implemented
+
+By default, fetches and registers nacelle binary.
+
+```bash
+capsule setup --engine nacelle [--version]
+```
+
+## Open / Run
+
+### `capsule open`
+**Status:** Implemented
+
+Execute `.capsule` or `capsule.toml`. If eager dependencies exist in `[ipc.imports]`, capsule-cli starts Services first and waits for ready.
+
+```bash
+capsule open <path> [--watch] [--background] [--enforcement]
+```
+
+### `capsule new`
+**Status:** Implemented
+
+Generate new project from template.
+
+```bash
+capsule new <name> --template <python|node|hono|rust|go|shell>
+```
+
+## Pack / Keygen / Sign
+
+### `capsule pack`
+**Status:** Implemented
+
+Generate distribution using `.capsuleignore` and manifest settings.
+
+```bash
+capsule pack [dir] [--init] [--key] [--standalone] [--enforcement]
+```
+
+### `capsule keygen`
+**Status:** Implemented
+
+Generate signing key (Ed25519).
+
+```bash
+capsule keygen [--out] [--force] [--json]
+```
+
+### `capsule sign`
+**Status:** Implemented
+
+Attach signature to artifact.
+
+```bash
+capsule sign <target> --key <path> [--out]
+```
+
+## Process Management
+
+### `capsule ps`
+**Status:** Implemented
+
+List running Capsules.
+
+```bash
+capsule ps [--all] [--json]
+```
+
+### `capsule close / capsule logs`
+**Status:** Implemented
+
+Stop and log tracking.
+
+```bash
+capsule close [--id|--name] [--all] [--force]
+capsule logs [--id|--name] [--follow] [--tail]
+```
+
+## Guest
+
+### `capsule guest`
+**Status:** Implemented
+
+Process `.sync` in Guest mode. Current implementation uses guest.v2 (JSON over stdio), migrating to JSON-RPC 2.0 in future.
+
+```bash
+capsule guest <sync_path>
+```
+
+## Validate / Install
+
+### `capsule validate`
+**Status:** Implemented
+
+Besides manifest syntax validation, handles IPC reserved prefix conflicts, circular dependencies, and `remote = true` warnings (v0.3+ requirement).
+
+```bash
+capsule validate [path]
+```
+
+### `capsule install`
+**Status:** Implemented
+
+Through Store API distribution resolution, only installs distributions meeting `signature_status=verified` and hash integrity.
+
+```bash
+capsule install <name|path>
+```
+
+## IPC Commands
+
+IPC commands are specified by phase. `status` is v0.3, others are v0.4 planned.
+
+| Command | Phase | Status |
+|---------|-------|--------|
+| `capsule ipc status [--json]` | v0.3 | Planned/Designed |
+| `capsule ipc services` | v0.4 | Planned |
+| `capsule ipc call <svc> <cap> --input '{...}'` | v0.4 | Planned |
+| `capsule ipc logs / inspect` | v0.4 | Planned |
+
+## Source Registration
+
+### `capsule source register`
+**Status:** Implemented
+
+Register public GitHub repository as Store Source. Better Auth session (`CAPSULE_SESSION_TOKEN`) linkage recommended.
+
+```bash
+capsule source register <repo_url> [--registry] [--channel stable|beta]
+```
+
+:::caution[Note]
+Legacy `ato` commands (`ato publish`, etc.) are outside this Spec line. Current documentation is unified to `capsule` commands.
+:::
+
+---
+
+*Source: docs/specs/CAPSULE_CLI_SPEC.md (v0.3).*

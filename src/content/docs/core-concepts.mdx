@@ -1,0 +1,94 @@
+---
+title: Core Concepts
+description: Core concepts of the Capsule execution model
+---
+
+# Core Concepts
+
+<p class="lead">
+  The Capsule execution model operates with CLI, Runtime, and Desktop having separated responsibilities,
+  based on declarations in <code>capsule.toml</code>.
+</p>
+
+## What is Capsule
+
+Capsule is a package format for `.capsule` (app distribution) or `.sync` (self-updating data). Both are ultimately validated and executed based on declaration files.
+
+| Format | Primary Purpose | Reference Spec |
+|--------|----------------|----------------|
+| `.capsule` | App/tool distribution, runtime selection, signature verification | `CAPSULE_SPEC.md` |
+| `.sync` | Immediate payload display + TTL updates + (future) Vault encryption | `SYNC_SPEC.md` |
+
+## Manifest (capsule.toml)
+
+Required fields are `schema_version`, `name`, `version`, `type`, `execution`. Additional declarations: `targets`, `metadata`, `build`, `isolation`.
+
+```toml
+schema_version = "1.1"
+name = "example-app"
+version = "0.1.0"
+type = "app"
+
+[execution]
+runtime = "source"
+entrypoint = "./main.py"
+
+[targets.oci]
+image = "python:3.11-slim"
+
+[targets.wasm]
+# digest = "sha256:..."
+```
+
+## Lifecycle: Tasks and Services
+
+`LIFECYCLE_SPEC v1.2` explicitly separates terminating processes as `[tasks]` and resident processes as `[services]`. Nacelle executes them as a DAG (Smart Build, Dumb Runtime).
+
+```toml
+[tasks.install]
+cmd = "npm ci"
+
+[services.app]
+cmd = "npm start"
+depends_on = ["install"]
+readiness_probe = { http_get = "/health", port = "APP_PORT" }
+
+[lifecycle]
+run = "app"
+```
+
+## Runtime Routing
+
+The router's default order is `oci → wasm → source`. However, `execution.runtime` or explicit target specifications take priority.
+
+| Condition | Selected Runtime |
+|-----------|------------------|
+| `targets.oci.image` present, or `execution.runtime=oci` | OCI |
+| `targets.wasm` present, or entrypoint is wasm | Wasm |
+| Otherwise | Source (nacelle) |
+
+## IPC Roles (v1.1)
+
+The key change in IPC v1.1 is the transfer of Broker responsibilities from **nacelle to capsule-cli**.
+
+**capsule-cli**: Service resolution, RefCount, Token management, Schema validation, DAG integration
+
+**nacelle**: Sandbox Enforcer. Does not interpret IPC content, only handles isolation
+
+**ato-desktop**: HostBridge, mode switching, User Consent dialogs
+
+:::tip[Transport Agnostic]
+JSON-RPC 2.0 format is used commonly across stdio / Unix Socket / Named Pipe / tsnet.
+:::
+
+## Trust Model
+
+Minimum Trust UX is TOFU + Fingerprint pinning + Revocation list application. When signature mismatch occurs, the policy requires re-verification rather than temporary allowance.
+
+- Save fingerprint on first connection (`~/.capsule/trust_store.json`)
+- Petname is optional but linked to trust store's key_id
+- Key rotation maintains short `previous_key` co-existence period
+
+---
+
+*Source specs: CAPSULE_SPEC, LIFECYCLE_SPEC, CAPSULE_IPC_SPEC, TRUST_AND_KEYS.*
