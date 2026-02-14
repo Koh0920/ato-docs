@@ -1,4 +1,4 @@
-# Ato.Sys Documentation
+# Ato Store Documentation
 
 Astro + Starlight documentation site for Capsule platform.
 
@@ -7,7 +7,7 @@ Astro + Starlight documentation site for Capsule platform.
 This documentation site is built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build/), featuring:
 
 - English language content (default)
-- Custom Ato.Sys design system
+- Custom Ato Store design system
 - Pagefind search integration
 - MDX support for interactive components
 - Responsive layout with custom sidebar

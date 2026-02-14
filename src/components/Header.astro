@@ -17,9 +17,12 @@ const currentPath = Astro.url.pathname;
   <div class="site-header-inner">
     <!-- Left Section: Logo & Main Nav -->
     <div class="site-header-left">
-      <a href="/" class="site-logo" aria-label="Ato.Sys Home">
-        <img src="/favicon.svg" width="28" height="28" alt="Ato.Sys Logo">
-        <span>Ato.Sys</span>
+      <a href="/" class="site-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="var(--fg)"/>
+          <path d="M8 14L14 8L20 14L14 20L8 14Z" fill="white"/>
+        </svg>
+        <span>Ato</span>
       </a>
 
     </div>
