@@ -1,71 +1,458 @@
- ---
- import type { Props } from '@astrojs/starlight/props';
- import Header from './Header.astro';
+---
+// src/components/PageFrame.astro
+import type { Props } from '@astrojs/starlight/props';
 
- const { locale } = Astro.props;
- ---
+const { hasSidebar = true } = Astro.props;
+---
 
- <div class="page">
-   <Header locale={locale} />
+<div class="page-wrapper" data-has-sidebar={hasSidebar}>
+  <!-- Header Slot -->
+  <slot name="header" />
+  
+  <div class="layout-wrapper">
+    <!-- Sidebar Slot -->
+    {hasSidebar && <slot name="sidebar" />}
+    
+    <!-- Main Content Area -->
+    <div class="main-content-wrapper">
+      <!-- Mobile Menu Toggle -->
+      {hasSidebar && (
+        <button 
+          type="button" 
+          class="mobile-menu-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <svg class="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+          <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          <span class="toggle-label">Menu</span>
+        </button>
+      )}
+      
+      <div class="content-layout">
+        <!-- 【修正】Starlightのコンテンツはデフォルトスロットに渡されます -->
+        <main class="main-content" id="main-content">
+          <article class="prose animate-fade-up">
+            <slot />
+          </article>
+        </main>
+        
+        <!-- TOC Sidebar Slot -->
+        <slot name="page-sidebar" />
+      </div>
 
-   <div class="main-frame">
-     <slot />
-   </div>
- </div>
+      <!-- Footer -->
+      <footer class="page-footer">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <span class="copyright">© {new Date().getFullYear()} Ato.Sys. All rights reserved.</span>
+          </div>
+          <div class="footer-right">
+            <a href="/privacy" class="footer-link">Privacy Policy</a>
+            <a href="/terms" class="footer-link">Terms of Service</a>
+            <a href="https://status.ato.sys" target="_blank" rel="noopener noreferrer" class="footer-link">
+              Status
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu Overlay -->
+  {hasSidebar && (
+    <div class="mobile-menu-overlay" aria-hidden="true"></div>
+  )}
+  
+  <a href="#main-content" class="skip-link">Skip to content</a>
+</div>
 
- <style>
-   /* Hide first content panel containing auto-generated title */
-   .main-pane > .content-panel:first-child {
-     display: none !important;
-   }
 
-   .main-pane > .content-panel:nth-child(1) {
-     display: none !important;
-   }
+<style>
+  /* ========================================
+     PAGE WRAPPER
+     ======================================== */
+  .page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+  }
 
-   h1.astro-j6tvhyss {
-     display: none !important;
-   }
+  /* ========================================
+     LAYOUT WRAPPER
+     ======================================== */
+  .layout-wrapper {
+    display: flex;
+    flex: 1;
+    padding-top: 64px; /* Header height */
+  }
 
-   .page {
-     display: block;
-     min-height: 100vh;
-   }
+  /* ========================================
+     MAIN CONTENT WRAPPER
+     ======================================== */
+  .main-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Prevent flex overflow */
+    transition: margin-left 0.2s ease;
+  }
 
-   .main-frame {
-     margin-left: 280px;
-     padding-top: 64px;
-     min-height: 100vh;
-     background: var(--bg);
-   }
+  /* When sidebar is present, add left margin */
+  :global([data-has-sidebar="true"]) .main-content-wrapper {
+    margin-left: 280px;
+  }
 
-   @media (max-width: 1024px) {
-     .main-frame {
-       margin-left: 0;
-     }
-   }
- </style>
+  /* ========================================
+     MOBILE MENU TOGGLE
+     ======================================== */
+  .mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    margin: 16px 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
 
- <script>
-  // Hide the first content panel (contains Starlight's auto-generated page title)
-  (() => {
-    // Try multiple methods to find and hide the first content panel
-    const hideFirstPanel = () => {
-      const mainPane = document.querySelector('.main-pane');
-      if (mainPane) {
-        const firstContentPanel = mainPane.querySelector('.content-panel:first-child');
-        if (firstContentPanel && firstContentPanel.querySelector('h1[id="_top"]')) {
-          firstContentPanel.style.setProperty('display', 'none', 'important');
-        }
-      }
-    };
+  .mobile-menu-toggle:hover {
+    background: var(--bg-elevated);
+    border-color: var(--fg-tertiary);
+    color: var(--fg);
+  }
 
-    // Run immediately
-    hideFirstPanel();
+  .mobile-menu-toggle .icon-close {
+    display: none;
+  }
 
-    // Run after DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', hideFirstPanel, { once: true });
+  .mobile-menu-toggle[aria-expanded="true"] .icon-menu {
+    display: none;
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+
+  .toggle-label {
+    flex: 1;
+    text-align: left;
+  }
+
+  /* ========================================
+     MAIN CONTENT
+     ======================================== */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ========================================
+     PAGE FOOTER
+     ======================================== */
+  .page-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .copyright {
+    font-size: 13px;
+    color: var(--fg-tertiary);
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--fg-tertiary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--fg);
+  }
+
+  .footer-link svg {
+    opacity: 0.6;
+  }
+
+  .footer-link:hover svg {
+    opacity: 1;
+  }
+
+  /* ========================================
+     MOBILE MENU OVERLAY
+     ======================================== */
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 90;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-menu-overlay.visible {
+    opacity: 1;
+  }
+
+  /* ========================================
+     SKIP LINK (Accessibility)
+     ======================================== */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 999;
+    padding: 12px 20px;
+    background: var(--fg);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: top 0.15s ease;
+  }
+
+  .skip-link:focus {
+    top: 16px;
+  }
+
+  /* ========================================
+     RESPONSIVE STYLES
+     ======================================== */
+  @media (max-width: 1024px) {
+    /* Reset sidebar margin on mobile */
+    :global([data-has-sidebar="true"]) .main-content-wrapper {
+      margin-left: 0;
     }
-  })();
+
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu-overlay.visible {
+      display: block;
+    }
+
+    /* Mobile sidebar styles (controlled by JS) */
+    :global(.site-sidebar.mobile-open) {
+      display: flex;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      transform: translateX(0);
+    }
+
+    /* Footer responsive */
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px 20px;
+    }
+
+    .footer-right {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner {
+      align-items: center;
+    }
+
+    .footer-left,
+    .footer-right {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .footer-right {
+      justify-content: center;
+    }
+  }
+
+  /* ========================================
+     PRINT STYLES
+     ======================================== */
+  @media print {
+    .layout-wrapper {
+      padding-top: 0;
+    }
+
+    :global([data-has-sidebar="true"]) .main-content-wrapper {
+      margin-left: 0;
+    }
+
+    .page-footer {
+      display: none;
+    }
+  }
+  .content-layout {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* メインコンテンツとTOCの間隔 */
+    max-width: 1280px; /* コンテンツ全体の最大幅 */
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+    width: 100%;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0; /* flexアイテムの縮小を許可 */
+    max-width: 800px; /* テキストの最大幅 */
+  }
+
+  /* Prose Styles (custom.cssから移動またはここで定義) */
+  :global(.prose h1) {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  :global(.prose p) {
+    color: var(--fg-secondary);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  
+  :global(.prose a) {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  
+  :global(.prose a:hover) {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .content-layout {
+      padding: 32px 20px 60px;
+    }
+    /* モバイルではTOCを非表示（Starlight側で制御されますが、レイアウトも調整） */
+    .content-layout > :global(*:last-child) {
+       display: none;
+    }
+  }
+</style>
+
+<script>
+  // Mobile Menu Toggle Functionality
+  function initMobileMenu() {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const sidebar = document.querySelector('.site-sidebar');
+    const body = document.body;
+
+    if (!toggle || !overlay || !sidebar) return;
+
+    function openMenu() {
+      toggle?.setAttribute('aria-expanded', 'true');
+      overlay?.classList.add('visible');
+      sidebar?.classList.add('mobile-open');
+      body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      toggle?.setAttribute('aria-expanded', 'false');
+      overlay?.classList.remove('visible');
+      sidebar?.classList.remove('mobile-open');
+      body.style.overflow = '';
+    }
+
+    // Toggle button click
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Overlay click to close
+    overlay?.addEventListener('click', closeMenu);
+
+    // Close on sidebar link click (mobile)
+    sidebar?.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar?.classList.contains('mobile-open')) {
+        closeMenu();
+      }
+    });
+
+    // Close on window resize (if desktop size)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024 && sidebar?.classList.contains('mobile-open')) {
+        closeMenu();
+      }
+    });
+  }
+
+  // Initialize on page load and after View Transitions
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  document.addEventListener('astro:page-load', initMobileMenu);
+
+  // Re-initialize after View Transitions
+  document.addEventListener('astro:after-swap', initMobileMenu);
 </script>

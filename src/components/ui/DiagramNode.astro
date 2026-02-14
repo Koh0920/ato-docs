@@ -1,0 +1,56 @@
+---
+// src/components/ui/DiagramNode.astro
+
+/**
+ * DiagramNode Component
+ * @param {string} title - ノードのタイトル
+ * @param {string} description - ノードの説明
+ * @param {boolean} [highlight=false] - 強調表示するかどうか
+ */
+interface Props {
+  title: string;
+  description: string;
+  highlight?: boolean;
+}
+
+const { title, description, highlight = false } = Astro.props;
+---
+
+<div class:list={["diagram-node", { highlight }]}>
+  <div class="node-title">{title}</div>
+  <div class="node-desc">{description}</div>
+</div>
+
+<style>
+  .diagram-node {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .diagram-node.highlight {
+    background: var(--fg);
+    border-color: var(--fg);
+  }
+
+  .diagram-node.highlight .node-title,
+  .diagram-node.highlight .node-desc {
+    color: white;
+  }
+
+  .node-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--fg);
+  }
+
+  .node-desc {
+    font-size: 11px;
+    color: var(--fg-tertiary);
+  }
+</style>

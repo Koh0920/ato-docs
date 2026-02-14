@@ -1,0 +1,137 @@
+---
+// src/components/ui/CodeBlock.astro
+
+/**
+ * CodeBlock Component
+ * @param {string} [title] - オプションのファイル名やタイトル
+ */
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="code-block-wrapper">
+  {title && <div class="code-block-title">{title}</div>}
+  <div class="code-block">
+    <pre><slot /></pre>
+  </div>
+  <button class="code-copy" aria-label="Copy code">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .code-block-wrapper {
+    position: relative;
+    margin: 24px 0;
+  }
+
+  .code-block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--fg-tertiary);
+    background: var(--bg-elevated);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px 6px 0 0;
+    border: 1px solid #2A2A2A;
+    border-bottom: none;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .code-block {
+    background: #1A1A1A;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    border: 1px solid #2A2A2A;
+  }
+
+  .code-block pre {
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    color: #E5E5E5;
+  }
+
+  /* シンタックスハイライト用クラス（グローバルCSSから移植しても良い） */
+  :global(.code-comment) { color: #737373; }
+  :global(.code-cmd) { color: #4ADE80; }
+  :global(.code-pkg) { color: #60A5FA; }
+  :global(.code-str) { color: #FBBF24; }
+  :global(.code-flag) { color: #C084FC; }
+  :global(.code-key) { color: #F472B6; }
+  :global(.code-error) { color: #F87171; }
+  :global(.code-output) { color: #A3A3A3; }
+
+  .code-copy {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .code-copy:hover {
+    background: rgba(255,255,255,0.15);
+  }
+
+  .code-copy svg {
+    width: 16px;
+    height: 16px;
+    color: #A3A3A3;
+    transition: color 0.15s ease;
+  }
+
+  .code-copy.copied svg {
+    color: #4ADE80;
+  }
+</style>
+
+<script define:vars={{}}>
+  document.querySelectorAll('.code-block-wrapper').forEach(wrapper => {
+    const btn = wrapper.querySelector('.code-copy');
+    const pre = wrapper.querySelector('pre');
+    
+    if (btn && pre) {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.textContent || '');
+          btn.classList.add('copied');
+          btn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          `;
+          
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            `;
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    }
+  });
+</script>

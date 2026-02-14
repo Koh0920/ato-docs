@@ -1,0 +1,41 @@
+---
+// 子要素を自動で番号付け
+---
+
+<div class="steps">
+  <slot />
+</div>
+
+<style>
+  .steps {
+    counter-reset: step;
+  }
+  .steps > :global(*) {
+    position: relative;
+    padding-left: 48px;
+    padding-bottom: 32px;
+    border-left: 2px solid var(--border);
+    margin-left: 16px;
+  }
+  .steps > :global(*:last-child) {
+    border-left-color: transparent;
+    padding-bottom: 0;
+  }
+  .steps > :global(*::before) {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: -17px;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--fg);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+</style>

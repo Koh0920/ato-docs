@@ -1,0 +1,49 @@
+---
+// src/components/ui/Diagram.astro
+
+import DiagramNode from './DiagramNode.astro';
+
+/**
+ * Diagram Component
+ * @param {string} [title] - ダイアグラムのタイトル
+ */
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="diagram">
+  {title && <div class="diagram-title">{title}</div>}
+  <div class="diagram-flow">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .diagram {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+
+  .diagram-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+  }
+
+  .diagram-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+</style>

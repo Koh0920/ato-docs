@@ -1,0 +1,20 @@
+---
+interface Props {
+  name: string;
+  badge?: string;
+  usage?: string;
+}
+
+const { name, badge = 'Core', usage } = Astro.props;
+---
+
+<div class="command-card">
+  <div class="command-header">
+    <span class="command-name">{name}</span>
+    <span class="command-badge">{badge}</span>
+  </div>
+  <div class="command-body">
+    {usage && <div class="command-usage">{usage}</div>}
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,86 @@
+---
+// src/components/ui/ConceptCard.astro
+
+/**
+ * ConceptCard Component
+ * @param {string} title - カードのタイトル
+ * @param {string} description - 説明文
+ * @param {'blue' | 'purple' | 'amber' | 'cyan' | 'green' | 'red'} [color='blue'] - アイコン背景の色
+ */
+interface Props {
+  title: string;
+  description: string;
+  color?: 'blue' | 'purple' | 'amber' | 'cyan' | 'green' | 'red';
+}
+
+const { title, description, color = 'blue' } = Astro.props;
+
+// 色のマッピング
+const colorStyles = {
+  blue: { bg: '#EFF6FF', stroke: '#3B82F6' },
+  purple: { bg: '#F5F3FF', stroke: '#8B5CF6' },
+  amber: { bg: '#FFFBEB', stroke: '#F59E0B' },
+  cyan: { bg: '#ECFEFF', stroke: '#06B6D4' },
+  green: { bg: '#ECFDF5', stroke: '#10B981' },
+  red: { bg: '#FEF2F2', stroke: '#EF4444' },
+};
+
+const selectedStyle = colorStyles[color];
+---
+
+<div class="concept-card">
+  <div class="icon" style={`background: ${selectedStyle.bg};`}>
+    <slot name="icon">
+      <!-- デフォルトアイコン（プレースホルダー） -->
+      <svg viewBox="0 0 24 24" fill="none" stroke={selectedStyle.stroke} stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+      </svg>
+    </slot>
+  </div>
+  <h4>{title}</h4>
+  <p>{description}</p>
+</div>
+
+<style>
+  .concept-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .concept-card:hover {
+    border-color: #D4D4D4;
+    box-shadow: var(--shadow-card);
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--fg);
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--fg-tertiary);
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>

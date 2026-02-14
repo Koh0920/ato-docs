@@ -1,21 +1,221 @@
 ---
+// src/components/TocSidebar.astro
 import type { Props } from '@astrojs/starlight/props';
 
-const { toc } = Astro.props;
+// Starlightのpropsから目次データ（headings）を取得
+const { headings } = Astro.props as Props & { headings: any[] };
+
+// H2とH3のみをフィルタリング（H1はページタイトルなので除外）
+const tocItems = (headings || []).filter(h => h.depth === 2 || h.depth === 3);
+
+// 目次が存在する場合のみ表示
+const hasToc = tocItems.length > 0;
 ---
 
-{toc && toc.items && toc.items.length > 0 && (
-  <aside class="toc-sidebar">
-    <div class="toc-title">On this page</div>
-    <nav>
-      {toc.items.map((item: any) => (
-        <a
-          href={`#${item.slug}`}
-          class="toc-link"
-        >
-          {item.text}
-        </a>
-      ))}
-    </nav>
+{hasToc && (
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-wrapper">
+      <div class="toc-title">On this page</div>
+      <nav class="toc-nav">
+        <ul class="toc-list">
+          {tocItems.map((heading) => (
+            <li class={`toc-item depth-${heading.depth}`}>
+              <a 
+                href={`#${heading.slug}`}
+                class="toc-link"
+                data-heading-slug={heading.slug}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   </aside>
 )}
+
+<style>
+  .toc-sidebar {
+    /* 固定位置の調整 */
+    position: fixed;
+    top: 96px; /* Header(64px) + margin(32px) */
+    right: 40px;
+    width: 200px;
+    max-height: calc(100vh - 120px);
+    
+    /* スクロール追従 */
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* 表示制御（デスクトップのみ） */
+    display: block;
+    z-index: 20;
+  }
+
+  /* スクロールバーのスタイリング */
+  .toc-sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .toc-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .toc-sidebar::-webkit-scrollbar-thumb {
+    background: transparent; /* 通常は非表示 */
+    border-radius: 2px;
+  }
+  .toc-sidebar:hover::-webkit-scrollbar-thumb {
+    background: var(--border);
+  }
+
+  .toc-wrapper {
+    padding: 8px 0;
+  }
+
+  .toc-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-tertiary);
+    margin-bottom: 12px;
+    padding-left: 12px;
+  }
+
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-link {
+    display: block;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--fg-tertiary);
+    text-decoration: none;
+    padding: 4px 12px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
+  }
+
+  .toc-link:hover {
+    color: var(--fg-secondary);
+    background: var(--bg-elevated);
+  }
+
+  /* アクティブ状態 */
+  .toc-link.active {
+    color: var(--fg);
+    border-left-color: var(--fg);
+    font-weight: 500;
+  }
+
+  /* ネストされたH3のインデント */
+  .toc-item.depth-3 {
+    padding-left: 12px;
+  }
+
+  .toc-item.depth-3 .toc-link {
+    font-size: 12px;
+    padding-left: 16px;
+  }
+
+  /* レスポンシブ（タブレット以下では非表示） */
+  @media (max-width: 1280px) {
+    .toc-sidebar {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Intersection Observerを使用してスクロールに応じたアクティブ状態を更新
+   */
+  function initTocHighlight() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article.prose h2[id], article.prose h3[id]');
+
+    if (headings.length === 0 || tocLinks.length === 0) return;
+
+    // オプザーバーの設定
+    // ビューポートの上部10%を監視エリアとする
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -80% 0px',
+      threshold: 0,
+    };
+
+    let currentActive: Element | null = null;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute('id');
+        const tocLink = document.querySelector(`.toc-link[data-heading-slug="${id}"]`);
+
+        if (entry.isIntersecting) {
+          // 現在のアクティブを解除
+          if (currentActive) {
+            currentActive.classList.remove('active');
+          }
+          // 新しいアクティブを設定
+          tocLink?.classList.add('active');
+          currentActive = tocLink;
+        }
+      });
+    }, observerOptions);
+
+    // 各見出しを監視
+    headings.forEach((heading) => observer.observe(heading));
+
+    // 初期状態（最初の要素をアクティブにする場合のフォールバック）
+    if (!currentActive && tocLinks.length > 0) {
+      tocLinks[0].classList.add('active');
+      currentActive = tocLinks[0];
+    }
+  }
+
+  // クリック時のスムーズスクロール
+  function initTocClick() {
+    document.querySelectorAll('.toc-link').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = (link as HTMLAnchorElement).getAttribute('data-heading-slug');
+        const target = document.getElementById(slug || '');
+        
+        if (target) {
+          // ヘッダーの高さ分オフセット
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // URLハッシュを更新（履歴に残さない）
+          history.replaceState(null, '', `#${slug}`);
+        }
+      });
+    });
+  }
+
+  // 初期化
+  document.addEventListener('DOMContentLoaded', () => {
+    initTocHighlight();
+    initTocClick();
+  });
+
+  // View Transitions対応
+  document.addEventListener('astro:page-load', () => {
+    initTocHighlight();
+    initTocClick();
+  });
+</script>
