@@ -33,13 +33,13 @@ const { title, description, highlight = false } = Astro.props;
   }
 
   .diagram-node.highlight {
-    background: var(--fg);
-    border-color: var(--fg);
+    background: var(--bg-strong);
+    border-color: var(--bg-strong);
   }
 
   .diagram-node.highlight .node-title,
   .diagram-node.highlight .node-desc {
-    color: white;
+    color: var(--text-inverse);
   }
 
   .node-title {

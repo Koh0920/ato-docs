@@ -15,6 +15,13 @@
   --accent-soft: #E6F0FF;
   --border: #E5E5E5;
   --border-subtle: #F0F0F0;
+  /* Semantic aliases */
+  --text: var(--fg);
+  --text-inverse: #FFFFFF;
+  --bg-strong: var(--fg);
+  /* overlay tokens for UI elements */
+  --overlay: rgba(255,255,255,0.10);
+  --overlay-strong: rgba(255,255,255,0.15);
   /* ... 他の変数 ... */
 }
 
@@ -22,7 +29,7 @@ body {
   font-family: 'DM Sans', sans-serif;
   /* フォント適用 */
   background: var(--bg);
-  color: var(--fg);
+  color: var(--text);
 }
 
 /* 他のコンポーネントスタイル... */
