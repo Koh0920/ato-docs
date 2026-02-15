@@ -385,9 +385,16 @@ const { hasSidebar = true } = Astro.props;
     .content-layout {
       padding: 32px 20px 60px;
     }
-    /* モバイルではTOCを非表示（Starlight側で制御されますが、レイアウトも調整） */
-    .content-layout > :global(*:last-child) {
-       display: none;
+    /* モバイルでは TOC のみを非表示にする（汎用 :last-child を避ける） */
+    .content-layout > :global(.toc-sidebar),
+    .content-layout > .toc-sidebar {
+      display: none;
+    }
+
+    /* main コンテンツが誤って隠れないように防御的に表示を保証 */
+    .content-layout > :global(.main-content),
+    .content-layout > .main-content {
+      display: block !important;
     }
   }
 </style>
