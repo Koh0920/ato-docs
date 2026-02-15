@@ -18,7 +18,10 @@ const currentPath = Astro.url.pathname;
     <!-- Left Section: Logo & Main Nav -->
     <div class="site-header-left">
       <a href="/" class="site-logo">
-        <img src="/favicon.svg" width="28" height="28" alt="Ato Logo">
+        <picture>
+          <source srcset="/icon-dark.svg" media="(prefers-color-scheme: dark)" type="image/svg+xml">
+          <img src="/favicon.svg" width="28" height="28" alt="Ato Logo">
+        </picture>
         <span>Ato</span>
       </a>
 
@@ -49,6 +52,26 @@ const currentPath = Astro.url.pathname;
     -webkit-backdrop-filter: blur(12px);
     background: rgba(250, 250, 250, 0.9);
     border-bottom: 1px solid var(--border);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .site-header {
+      background: rgba(10, 10, 10, 0.6);
+      border-bottom-color: rgba(255,255,255,0.06);
+      -webkit-text-fill-color: currentColor;
+    }
+
+    /* Make Store button visible in dark mode — white bg + dark text */
+    .site-header .btn-store {
+      background: var(--text-inverse);
+      color: var(--bg-strong);
+    }
+
+    /* Higher-specificity rule so it overrides the later light-mode hover */
+    .site-header .btn-store:hover {
+      background: #f2f2f2;
+      color: var(--bg-strong);
+    }
   }
 
   .site-header-inner {

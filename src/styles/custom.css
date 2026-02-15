@@ -18,18 +18,45 @@
   /* Semantic aliases */
   --text: var(--fg);
   --text-inverse: #FFFFFF;
-  --bg-strong: var(--fg);
+  --bg-strong: #0A0A0A; /* stable dark surface for strong UI elements */
   /* overlay tokens for UI elements */
   --overlay: rgba(255,255,255,0.10);
   --overlay-strong: rgba(255,255,255,0.15);
   /* ... 他の変数 ... */
 }
 
+html { color-scheme: light dark; }
+
 body {
   font-family: 'DM Sans', sans-serif;
   /* フォント適用 */
   background: var(--bg);
   color: var(--text);
+  -webkit-text-fill-color: currentColor; /* mitigate UA forced colorization */
+}
+
+/* Prevent some browsers from forcing a different fill color */
+* { -webkit-text-fill-color: currentColor; }
+
+/* Dark-mode variable overrides so browsers preferring dark get a proper theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0d0f;
+    --bg-card: #0f1113;
+    --bg-elevated: #111315;
+    --fg: #E6EEF3;
+    --fg-secondary: #C9D6DD;
+    --fg-tertiary: #9AA6AD;
+    --accent: #60A5FA;
+    --accent-soft: rgba(96,165,250,0.08);
+    --border: rgba(255,255,255,0.06);
+    --border-subtle: rgba(255,255,255,0.02);
+    --bg-strong: #0A0A0A; /* keep strong backgrounds dark in dark mode */
+    --text: var(--fg);
+    --text-inverse: #FFFFFF;
+    --overlay: rgba(0,0,0,0.10);
+    --overlay-strong: rgba(0,0,0,0.15);
+  }
 }
 
 /* 他のコンポーネントスタイル... */
